@@ -22,7 +22,7 @@ class TransactionFactory extends Factory
         return [
             'user_id' => $userIds[array_rand($userIds)],
             'sent_from_email' => fake()->email(),
-            'amount' => fake()->randomFloat(null, 0.2),
+            'amount' => fake()->randomFloat(null, 0.2, 50),
             'sent_at' => now(),
         ];
     }

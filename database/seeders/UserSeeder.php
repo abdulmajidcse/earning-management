@@ -21,6 +21,6 @@ class UserSeeder extends Seeder
         ]);
 
         // create general user
-        User::factory(10)->create();
+        User::factory(200)->create();
     }
 }
