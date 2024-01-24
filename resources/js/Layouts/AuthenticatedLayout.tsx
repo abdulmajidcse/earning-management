@@ -34,12 +34,16 @@ export default function Authenticated({
                                     Dashboard
                                 </NavLink>
 
-                                <NavLink
-                                    href={route("users.index")}
-                                    active={route().current("users.index")}
-                                >
-                                    User List
-                                </NavLink>
+                                {user.is_admin ? (
+                                    <NavLink
+                                        href={route("users.index")}
+                                        active={route().current("users.index")}
+                                    >
+                                        User List
+                                    </NavLink>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </div>
 
@@ -145,12 +149,16 @@ export default function Authenticated({
                             Dashboard
                         </ResponsiveNavLink>
 
-                        <ResponsiveNavLink
-                            href={route("users.index")}
-                            active={route().current("users.index")}
-                        >
-                            User List
-                        </ResponsiveNavLink>
+                        {user.is_admin ? (
+                            <ResponsiveNavLink
+                                href={route("users.index")}
+                                active={route().current("users.index")}
+                            >
+                                User List
+                            </ResponsiveNavLink>
+                        ) : (
+                            ""
+                        )}
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

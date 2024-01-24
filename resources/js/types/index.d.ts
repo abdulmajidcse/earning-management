@@ -6,6 +6,7 @@ export interface User {
     email: string;
     mobile: string;
     is_admin: boolean;
+    is_active: boolean;
     email_verified_at: string;
 }
 
@@ -18,18 +19,21 @@ export type PageProps<
     ziggy: Config & { location: string };
 };
 
-export interface PaginatedData<T> {
+export interface Paginate {
     current_page: number;
+    from?: number;
+    last_page: number;
+    links: [{ active: boolean; label: string; url?: string }];
+    next_page_url?: string;
+    prev_page_url?: string;
+    to?: number;
+    total: number;
+}
+
+export interface PaginatedData<T> extends Paginate {
     data: T[];
     first_page_url: string;
-    from: number;
-    last_page: number;
     last_page_url: string;
-    links: [active: boolean, label: string, url?: string];
-    next_page_url?: string;
     path: string;
     per_page: number;
-    prev_page_url?: string;
-    to: number;
-    total: number;
 }
