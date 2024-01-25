@@ -9,8 +9,9 @@ import { User } from "@/types";
 export default function Authenticated({
     user,
     header,
+    headerAction,
     children,
-}: PropsWithChildren<{ user: User; header?: ReactNode }>) {
+}: PropsWithChildren<{ user: User; header?: ReactNode, headerAction?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -190,7 +191,10 @@ export default function Authenticated({
             {header && (
                 <header className="bg-white dark:bg-gray-800 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {header}
+                        <div className="flex flex-col sm:flex-row sm:justify-between gap-2 sm:gap-0">
+                            <div>{header}</div>
+                            <div>{headerAction}</div>
+                        </div>
                     </div>
                 </header>
             )}

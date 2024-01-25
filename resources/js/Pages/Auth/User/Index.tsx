@@ -34,6 +34,7 @@ export default function Index({
                     User List
                 </h2>
             }
+            headerAction={<Link href={route("users.create")} className="theme-btn">New User</Link>}
         >
             <Head title="User List" />
 
