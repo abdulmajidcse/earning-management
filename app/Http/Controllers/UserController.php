@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::latest()->paginate(20)->onEachSide(1)->withQueryString();
+        $data['users'] = User::withSum('currentTransactions', 'amount')->latest()->paginate(20)->onEachSide(1)->withQueryString();
 
         return Inertia::render('Auth/User/Index', $data);
     }

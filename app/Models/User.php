@@ -45,4 +45,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // all transation by this user
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    // all current transation by this user
+    // where is_paid is equal to false
+    public function currentTransactions()
+    {
+        return $this->transactions()->where('is_paid', false);
+    }
 }

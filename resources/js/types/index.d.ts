@@ -8,6 +8,7 @@ export interface User {
     is_admin: boolean;
     is_active: boolean;
     email_verified_at: string;
+    current_transactions_sum_amount: number;
 }
 
 export type PageProps<

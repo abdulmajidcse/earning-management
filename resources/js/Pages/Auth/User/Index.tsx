@@ -50,42 +50,70 @@ export default function Index({
 
                                 <Th>Email</Th>
 
+                                <Th>Current Withdraw</Th>
+
                                 <Th>Action</Th>
                             </tr>
                         }
                     >
                         {userList.length > 0 ? (
-                            userList.map(({ id, name, email, mobile }) => (
-                                <tr
-                                    key={`user-list-${useId()}`}
-                                    className="bg-white dark:bg-gray-700 dark:text-white text-left"
-                                >
-                                    <Td>{sl++}</Td>
+                            userList.map(
+                                ({
+                                    id,
+                                    name,
+                                    email,
+                                    mobile,
+                                    current_transactions_sum_amount = 0,
+                                }) => (
+                                    <tr
+                                        key={`user-list-${useId()}`}
+                                        className="bg-white dark:bg-gray-700 dark:text-white text-left"
+                                    >
+                                        <Td>{sl++}</Td>
 
-                                    <Td>{name}</Td>
+                                        <Td>{name}</Td>
 
-                                    <Td>{mobile}</Td>
+                                        <Td>{mobile}</Td>
 
-                                    <Td>{email}</Td>
+                                        <Td>{email}</Td>
 
-                                    <Td className="whitespace-nowrap">
-                                        <div className="space-x-2">
-                                            <Link
-                                                href={route("users.show", id)}
-                                                className="underline text-blue-500 hover:no-underline"
-                                            >
-                                                View
-                                            </Link>
-                                            <Link
-                                                href={route("users.edit", id)}
-                                                className="underline text-blue-500 hover:no-underline"
-                                            >
-                                                Edit
-                                            </Link>
-                                        </div>
-                                    </Td>
-                                </tr>
-                            ))
+                                        <Td>
+                                            {(
+                                                current_transactions_sum_amount ??
+                                                0
+                                            ).toLocaleString("en-US", {
+                                                style: "currency",
+                                                currency: "USD",
+                                                minimumFractionDigits: 2,
+                                                maximumFractionDigits: 2,
+                                            })}
+                                        </Td>
+
+                                        <Td className="whitespace-nowrap">
+                                            <div className="space-x-2">
+                                                <Link
+                                                    href={route(
+                                                        "users.show",
+                                                        id
+                                                    )}
+                                                    className="underline text-blue-500 hover:no-underline"
+                                                >
+                                                    View
+                                                </Link>
+                                                <Link
+                                                    href={route(
+                                                        "users.edit",
+                                                        id
+                                                    )}
+                                                    className="underline text-blue-500 hover:no-underline"
+                                                >
+                                                    Edit
+                                                </Link>
+                                            </div>
+                                        </Td>
+                                    </tr>
+                                )
+                            )
                         ) : (
                             <NoDataFound />
                         )}
