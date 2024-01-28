@@ -56,7 +56,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $data['user'] = $user;
+        $data['user'] = $user->loadSum('currentTransactions', 'amount');
 
         return Inertia::render('Auth/User/Show', $data);
     }

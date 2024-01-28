@@ -3,6 +3,7 @@ import { Head, Link } from "@inertiajs/react";
 import { PageProps, User } from "@/types";
 import InputLabel from "@/Components/InputLabel";
 import moment from "moment";
+import moneyFormat from "@/helpers/moneyFormat";
 
 export default function Show({ auth, user }: PageProps<{ user: User }>) {
     return (
@@ -55,6 +56,22 @@ export default function Show({ auth, user }: PageProps<{ user: User }>) {
                                 <p className="mt-1">
                                     {moment(user.created_at).format(
                                         "YYYY-MM-DD hh:mm:ss A"
+                                    )}
+                                </p>
+                            </div>
+
+                            <div className="border-solid border-2 border-gray-300 dark:border-gray-700 rounded-md p-1">
+                                <InputLabel value="Account Status" />
+                                <p className="mt-1">
+                                    {user.is_active ? "Active" : "Banned"}
+                                </p>
+                            </div>
+
+                            <div className="border-solid border-2 border-gray-300 dark:border-gray-700 rounded-md p-1">
+                                <InputLabel value="Current Transfer" />
+                                <p className="mt-1">
+                                    {moneyFormat(
+                                        user.current_transactions_sum_amount
                                     )}
                                 </p>
                             </div>

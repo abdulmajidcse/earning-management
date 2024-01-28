@@ -53,9 +53,27 @@ class User extends Authenticatable
     }
 
     // all current transation by this user
-    // where is_paid is equal to false
+    // where is_count is equal to false
     public function currentTransactions()
     {
-        return $this->transactions()->where('is_paid', false);
+        return $this->transactions()->where('is_count', false);
+    }
+
+    // all paidable transation by this user
+    public function paidableTransactions()
+    {
+        return $this->transactions()->where('is_count', true)->where('is_paid', false);
+    }
+
+    // all paid transation by this user
+    // where is_paid is equal to false
+    public function paidTransactions()
+    {
+        return $this->transactions()->where('is_paid', true);
+    }
+
+    public function paymentHistories()
+    {
+        return $this->hasMany(PaymentHistory::class);
     }
 }

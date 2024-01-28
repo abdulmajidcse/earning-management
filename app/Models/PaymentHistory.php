@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Transaction extends Model
+class PaymentHistory extends Model
 {
     use HasFactory;
 
@@ -16,11 +16,7 @@ class Transaction extends Model
      */
     protected $fillable = [
         'user_id',
-        'sent_from_email',
         'amount',
-        'sent_at',
-        'is_count',
-        'is_paid',
         'paid_at',
     ];
 

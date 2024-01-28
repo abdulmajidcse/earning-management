@@ -40,3 +40,17 @@ export interface PaginatedData<T> extends Paginate {
     path: string;
     per_page: number;
 }
+
+export interface Transaction extends User {
+    id: number;
+    user_id: number;
+    user: User;
+    sent_from_email: string;
+    amount: number;
+    sent_at: string;
+    is_paid: number;
+    is_count: number;
+    paid_at?: string;
+    created_at: string;
+    updated_at: string;
+}

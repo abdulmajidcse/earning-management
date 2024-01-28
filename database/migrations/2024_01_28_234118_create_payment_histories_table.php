@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('payment_histories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('restrict');
-            $table->string('sent_from_email');
             $table->double('amount');
-            $table->timestamp('sent_at');
-            $table->boolean('is_count')->default(0);
-            $table->boolean('is_paid')->default(0);
-            $table->timestamp('paid_at')->nullable();
+            $table->timestamp('paid_at');
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('payment_histories');
     }
 };

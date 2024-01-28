@@ -56,7 +56,7 @@ export default function Index({
 
                                 <Th>Email</Th>
 
-                                <Th>Current Withdraw</Th>
+                                <Th>Current Transfer</Th>
 
                                 <Th>Account Status</Th>
 
