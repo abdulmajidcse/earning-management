@@ -108,7 +108,6 @@ export default function UpdateProfileInformation({
                         value={data.mobile}
                         onChange={(e) => setData("mobile", e.target.value)}
                         required
-                        isFocused
                         autoComplete="mobile"
                     />
 
