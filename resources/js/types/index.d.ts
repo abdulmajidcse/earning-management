@@ -9,6 +9,8 @@ export interface User {
     is_active: boolean;
     email_verified_at: string;
     current_transactions_sum_amount: number;
+    created_at: string;
+    updated_at: string;
 }
 
 export type PageProps<

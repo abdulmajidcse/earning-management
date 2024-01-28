@@ -16,7 +16,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'isActive'])->group(function () {
     // any authenticated user can access this routes
     Route::get('/', function () {
         return Inertia::render('Dashboard');
@@ -27,9 +27,10 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // only admin can access this routes
-    Route::middleware('isAdmin')->group(function() {
-        Route::resource('users', UserController::class);
+    Route::middleware('isAdmin')->group(function () {
+        Route::resource('users', UserController::class)->except('destroy');
+        Route::put('users/{user}/change-status', [UserController::class, 'changeStatus'])->name('users.changeStatus');
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

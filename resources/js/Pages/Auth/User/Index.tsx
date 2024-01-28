@@ -7,6 +7,7 @@ import NoDataFound from "@/Components/DataTable/NoDataFound";
 import DataTable from "@/Components/DataTable/DataTable";
 import Th from "@/Components/DataTable/Th";
 import Td from "@/Components/DataTable/Td";
+import moneyFormat from "@/helpers/moneyFormat";
 
 export default function Index({
     auth,
@@ -34,7 +35,11 @@ export default function Index({
                     User List
                 </h2>
             }
-            headerAction={<Link href={route("users.create")} className="theme-btn">New User</Link>}
+            headerAction={
+                <Link href={route("users.create")} className="theme-btn">
+                    New User
+                </Link>
+            }
         >
             <Head title="User List" />
 
@@ -53,6 +58,8 @@ export default function Index({
 
                                 <Th>Current Withdraw</Th>
 
+                                <Th>Account Status</Th>
+
                                 <Th>Action</Th>
                             </tr>
                         }
@@ -65,6 +72,7 @@ export default function Index({
                                     email,
                                     mobile,
                                     current_transactions_sum_amount = 0,
+                                    is_active,
                                 }) => (
                                     <tr
                                         key={`user-list-${useId()}`}
@@ -79,15 +87,13 @@ export default function Index({
                                         <Td>{email}</Td>
 
                                         <Td>
-                                            {(
-                                                current_transactions_sum_amount ??
-                                                0
-                                            ).toLocaleString("en-US", {
-                                                style: "currency",
-                                                currency: "USD",
-                                                minimumFractionDigits: 2,
-                                                maximumFractionDigits: 2,
-                                            })}
+                                            {moneyFormat(
+                                                current_transactions_sum_amount
+                                            )}
+                                        </Td>
+
+                                        <Td>
+                                            {is_active ? "Active" : "Banned"}
                                         </Td>
 
                                         <Td className="whitespace-nowrap">
@@ -101,6 +107,7 @@ export default function Index({
                                                 >
                                                     View
                                                 </Link>
+
                                                 <Link
                                                     href={route(
                                                         "users.edit",
@@ -109,6 +116,19 @@ export default function Index({
                                                     className="underline text-blue-500 hover:no-underline"
                                                 >
                                                     Edit
+                                                </Link>
+
+                                                <Link
+                                                    href={route(
+                                                        "users.changeStatus",
+                                                        id
+                                                    )}
+                                                    method="put"
+                                                    className="underline text-red-500 hover:no-underline"
+                                                >
+                                                    {is_active
+                                                        ? "Banned"
+                                                        : "Active"}
                                                 </Link>
                                             </div>
                                         </Td>
